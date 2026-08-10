@@ -1,5 +1,11 @@
 # Savage Vault Showcase
 
+<p>
+  <img alt="Obsidian" src="https://img.shields.io/badge/Obsidian-7C3AED?style=for-the-badge&logo=obsidian&logoColor=white">
+  <img alt="Claude Code" src="https://img.shields.io/badge/Claude_Code-D97757?style=for-the-badge&logo=anthropic&logoColor=white">
+  <img alt="Codex" src="https://img.shields.io/badge/Codex-111827?style=for-the-badge&logo=openai&logoColor=white">
+</p>
+
 An agent-ready Obsidian knowledge system for turning a private research library into faster, safer, more decision-grade AI work.
 
 This repository is the public showcase, not the vault itself. It demonstrates the architecture, routing model, metadata schema, governance layer, ingestion workflow, validation checks, and redacted examples behind a much larger private corpus.
@@ -241,4 +247,3 @@ This is a personal knowledge base evolved into an agent operating layer.
 It is part library, part retrieval system, part governance model, part project memory, and part safety rail. The private corpus gives agents useful context; the routing and validation layers keep that context from becoming overconfident nonsense.
 
 That is the thing worth showing.
-
