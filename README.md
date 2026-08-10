@@ -6,68 +6,89 @@
   <img alt="Codex" src="https://img.shields.io/badge/Codex-111827?style=for-the-badge&logo=openai&logoColor=white">
 </p>
 
-An agent-ready Obsidian knowledge system for turning a private research library into faster, safer, more decision-grade AI work.
+A sanitized look at the Obsidian vault I use as a working memory layer for coding agents, research, sports analysis, finance, health, and project work.
 
-This repository is the public showcase, not the vault itself. It demonstrates the architecture, routing model, metadata schema, governance layer, ingestion workflow, validation checks, and redacted examples behind a much larger private corpus.
+The real vault is private. This repo shows the operating model: how notes are structured, how agents find the right context quickly, how source quality is marked, and how the system avoids publishing raw books, papers, personal notes, or licensed material.
 
-The private vault powers coding agents, research agents, sports-business reasoning, marketing strategy, health/training analysis, finance work, baseball analytics, project context, and personal operating systems. This repo shows how that system is built without publishing the licensed sources, raw files, personal notes, or full third-party-derived summaries.
+## The problem
 
-## Why this exists
+Long-context agents are easy to impress and easy to mislead.
 
-Most personal knowledge bases are designed for a person wandering through notes.
+If I give an agent the whole vault, it wastes time and grabs stale or irrelevant material. If I give it nothing, it repeats generic advice. The useful middle ground is a routed corpus: small entry files, explicit task paths, reviewed source notes, and hard rules about when the vault is only context.
 
-This one is designed for agents working under context limits.
-
-The goal is not “search my notes.” The goal is:
+The vault is built around that middle ground.
 
 ```text
-classify the task
-→ route to the right decision surface
-→ open only the relevant notes
-→ know what evidence is mature
-→ inspect live sources when live state matters
-→ validate before claiming done
+classify the request
+→ pick the route
+→ open the smallest useful set of notes
+→ check whether the note is reviewed
+→ inspect the live repo or source when current state matters
+→ validate before calling the work done
 ```
 
-That shift matters. Without routing and maturity metadata, a coding agent can grab a stale note, skip the live repo, and confidently make the wrong change. With the vault route, the agent has a map, a source hierarchy, and explicit hard stops.
+## What sits behind this showcase
 
-## What the private system contains
+The private vault currently has:
 
-At the time this showcase was prepared, the private vault contained:
-
-| Layer | Count | Role |
+| Layer | Count | What it does |
 |---|---:|---|
-| Wiki pages | 1,088 | Total structured notes available to agents |
-| Source summaries | 587 | Source-grounded extractions from papers, books, docs, and reports |
-| Concept cards | 312 | Reusable decision rules synthesized from reviewed sources |
-| Book overviews | 117 | Hubs for book-length sources and deep chapter/section notes |
-| Operating/retrieval/overview pages | 36 | Agent entry points, retrieval packs, governance docs, validation reports |
-| Project manifests | 18 | Repo-specific read-first maps for local project work |
-| Raw source files | 259 | Private PDFs/EPUBs/source files, intentionally excluded here |
+| Wiki pages | 1,088 | Structured notes available to agents |
+| Source summaries | 587 | Reviewed extractions from books, papers, docs, and reports |
+| Concept cards | 312 | Short decision rules synthesized from reviewed material |
+| Book hubs | 117 | Maps for book-length sources and deeper chapter notes |
+| Operating / retrieval pages | 36 | Routers, retrieval packs, validation reports, and access guides |
+| Project manifests | 18 | Repo-specific read-first files for local coding work |
+| Raw source files | 259 | Private source files, excluded from this repo |
 
-The corpus is not just stored; it is wired.
+The point is not the count. The point is that the pieces are wired together.
 
-## What this showcase includes
+## How agents use it
 
-- A public explanation of the vault architecture
-- Agent access patterns for Codex, Claude Code, ChatGPT-style agents, and direct-file readers
-- A redacted ingestion pipeline for books, papers, and web sources
-- A metadata schema for source maturity and retrieval behavior
-- Synthetic sample notes that show structure without exposing content
-- A validation script that blocks obvious raw/private-source leakage
-- A GitHub Actions workflow for showcase validation
+For a coding task, the route looks like this:
 
-## What this showcase does not include
+```text
+START HERE
+→ agent-entry
+→ question-router
+→ project-context-manifests
+→ matching project manifest
+→ coding-agent-operating-card
+→ agent-access-coding-corpus
+→ retrieval-pack-ai-engineering
+→ task-specific playbook
+→ live repo files
+→ validation checklist
+```
+
+Two rules matter most:
+
+1. A project root is not a repo target. The exact repository has to be named before code changes.
+2. The vault is not proof of live state. If the question depends on current repo behavior, API behavior, dependency versions, prices, schedules, laws, or production state, the agent has to inspect the live source.
+
+## What is included here
+
+- Architecture docs
+- Agent access pattern
+- Ingestion workflow
+- Public metadata schema
+- Redacted sample notes
+- Privacy/content boundary
+- Lightweight validation script
+- GitHub Actions check
+
+## What is not included
 
 - The real vault
 - Raw PDFs, EPUBs, books, papers, or downloaded source files
-- Personal notes, health notes, finance notes, journals, career details, or private project context
+- Personal notes
+- Private project context
 - Full source summaries derived from third-party works
-- Anything intended to let someone reconstruct the private corpus
+- Anything that would let someone reconstruct the private corpus
 
-This boundary is the point. The portfolio artifact is the system design, not the redistribution of the underlying library.
+That boundary is deliberate. The interesting part to show publicly is the system, not the library.
 
-## The architecture
+## Architecture
 
 ```mermaid
 flowchart TD
@@ -87,83 +108,48 @@ flowchart TD
     K --> L
 ```
 
-The private vault uses several note classes:
+The main note types:
 
 | Type | Purpose |
 |---|---|
-| `overview` | Domain maps, retrieval packs, validation reports, operating surfaces |
-| `source-summary` | Reviewed extraction from a paper, book, article, dataset, or official doc |
-| `book-overview` | Hub note for a book-length source and its chapter/section notes |
-| `concept` | Fast decision card synthesized from reviewed sources |
-| `analysis` | Operational playbook or cross-source synthesis |
-| `project-context-manifest` | Repo-specific map telling agents what to inspect first |
+| `overview` | Domain map, retrieval pack, validation report, or operating surface |
+| `source-summary` | Reviewed extraction from a source |
+| `book-overview` | Hub for a book-length source |
+| `concept` | Short reusable decision rule |
+| `analysis` | Playbook or cross-source synthesis |
+| `project-context-manifest` | Repo-specific read-first map |
 
-## Agent routing example
+## Retrieval packs
 
-Before touching code in a local project, the agent is expected to route like this:
+The private vault uses retrieval packs instead of broad search. A few examples:
 
-```text
-START HERE
-→ agent-entry
-→ question-router
-→ project-context-manifests
-→ matching project manifest
-→ coding-agent-operating-card
-→ agent-access-coding-corpus
-→ retrieval-pack-ai-engineering
-→ relevant coding-agent playbook
-→ live repo README / agent docs / config / source / tests
-→ coding-agent-review-checklist
-```
-
-Two rules sit underneath that whole flow:
-
-1. A project root is not a repository target. The exact repo must be named before code is modified.
-2. Vault notes are retrieval context, not proof of current repo state. The live repository wins.
-
-## Example retrieval packs
-
-The private vault uses retrieval packs as task-specific launchpads. Examples include:
-
-| Retrieval pack | What it routes |
+| Pack | Routes |
 |---|---|
-| AI engineering | RAG, agent design, tool use, evals, coding-agent behavior, data systems, MLOps |
-| Sports business and marketing | Sponsorship, brand growth, positioning, pricing, experiments, fan behavior |
-| Baseball trade evaluation | Sabermetrics, scouting, WAR/FV, roster value, uncertainty |
-| Health and training | Sleep, recovery, hypertrophy, strength, conditioning, wearable interpretation |
-| Quantitative finance | Factor investing, systematic equity, expected returns, ranking models |
-| Career | Resume/JD fit, labor-market evidence, career positioning, application strategy |
+| AI engineering | RAG, coding agents, evals, tool use, data systems, MLOps |
+| Sports business and marketing | Sponsorship, brand growth, positioning, pricing, experiments |
+| Baseball trade evaluation | WAR, FV, scouting, roster value, uncertainty |
+| Health and training | Sleep, recovery, strength, conditioning, wearable interpretation |
+| Quantitative finance | Factor investing, ranking models, calibration |
+| Career | Resume/JD fit, labor-market evidence, positioning |
 
-The important detail: agents do not start with broad search. They start with a route.
+## Ingestion depth
 
-## Depth, not sludge
+I do not create chapter notes just to say every chapter was covered.
 
-The ingestion model is intentionally deep where depth changes behavior.
+A book or paper gets deeper treatment when the extra grain changes how an agent behaves. A typical source can produce:
 
-For a book or paper, the private vault may create:
+1. a hub note;
+2. a whole-source extraction;
+3. targeted chapter or section notes;
+4. short concept cards;
+5. links from the relevant retrieval pack or playbook;
+6. validation checks for metadata and links.
 
-1. A hub note with source identity, scope, and chapter map
-2. A high-value extraction note for the whole source
-3. Targeted chapter/section notes where retrieval grain matters
-4. Concept cards that become reusable decision rules
-5. Route wiring into the relevant retrieval pack or playbook
-6. Validation records so agents know the maturity level
+Recent deep passes added routes for data contracts, schema evolution, MLOps, model drift, model artifact contracts, sponsorship evaluation, positioning, sticky messages, shareability, and staged experience design.
 
-Recent examples of “deep enough to change agent behavior” include:
+## Metadata that keeps agents honest
 
-| Area | Deep agent behavior added |
-|---|---|
-| Data contracts | Producer/consumer boundary, schema governance, rollout, compatibility |
-| MLOps | Artifact identity, drift monitoring, inference contracts, rollback |
-| Coding agents | Safe-change playbooks, validation gates, context budget discipline |
-| Sports sponsorship | Objective → fit → activation → metric layer → causal evidence |
-| Brand strategy | Positioning, sticky messages, shareability, staged experience design |
-
-The vault avoids creating dozens of thin chapter notes just to look complete. The bar is whether a note gives the agent a sharper decision surface.
-
-## Evidence maturity model
-
-Every mature page carries metadata that tells an agent how it can be used:
+Mature notes carry fields like:
 
 ```yaml
 validation_status: reviewed
@@ -176,36 +162,19 @@ approved_use: ["coding-agent-guidance"]
 prohibited_use: ["substituting-for-live-repo-inspection"]
 ```
 
-This lets the system distinguish:
+This is not ceremony. It tells an agent whether a note is evidence, a route, a synthesis, a hypothesis, or just legacy context.
 
-- evidence vs. synthesis
-- reviewed notes vs. legacy notes
-- high-confidence source summaries vs. hypothesis generators
-- routing pages vs. authority pages
-- private context vs. live-state proof
+## Validation
 
-## Validation and governance
+The private vault has deeper checks for unresolved links, missing metadata, source-fidelity status, stale manifests, index drift, claim conflicts, and high-stakes answer gates.
 
-The private vault has governance docs and validation passes for:
-
-- required frontmatter
-- unresolved wikilinks
-- source-fidelity status
-- raw-source references
-- stale project manifests
-- index drift
-- retrieval-pack promotion rules
-- claim conflicts
-- high-stakes answer gates
-- agent evaluation cases
-
-This showcase includes a smaller public validation script:
+This public repo includes a smaller guardrail:
 
 ```bash
 python scripts/validate_showcase.py
 ```
 
-It checks that the showcase stays sanitized and structurally coherent.
+It checks that the showcase stays structurally coherent and does not accidentally grow a raw-source directory or obvious private-source links.
 
 ## Repository map
 
@@ -232,18 +201,12 @@ It checks that the showcase stays sanitized and structurally coherent.
 ## Design principles
 
 - Route before search.
-- Open the narrowest useful source.
-- Treat notes as context, not live-state authority.
-- Keep private and licensed source material private.
+- Open fewer notes, but better ones.
+- Treat vault notes as context, not authority.
+- Keep private and licensed material private.
 - Make uncertainty visible.
-- Prefer explicit maturity metadata over vibes.
-- Let concept cards be fast, but make source notes available when evidence matters.
-- Never let an agent modify code before the exact repository and local conventions are known.
+- Prefer reviewed metadata over vibes.
+- Inspect the live repo before changing code.
 
-## Portfolio takeaway
+This is the piece I wanted to show: a personal knowledge base turned into an operating layer for agents, without pretending the private library itself belongs on GitHub.
 
-This is a personal knowledge base evolved into an agent operating layer.
-
-It is part library, part retrieval system, part governance model, part project memory, and part safety rail. The private corpus gives agents useful context; the routing and validation layers keep that context from becoming overconfident nonsense.
-
-That is the thing worth showing.
