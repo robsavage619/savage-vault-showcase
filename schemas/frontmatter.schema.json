@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Savage Vault Showcase Frontmatter",
+  "type": "object",
+  "required": [
+    "type",
+    "title",
+    "summary",
+    "tags",
+    "sources",
+    "created",
+    "updated",
+    "status",
+    "aliases",
+    "related",
+    "confidence"
+  ],
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": [
+        "overview",
+        "source-summary",
+        "book-overview",
+        "concept",
+        "analysis",
+        "project-context-manifest",
+        "entity",
+        "research-finding"
+      ]
+    },
+    "title": { "type": "string" },
+    "summary": { "type": "string" },
+    "tags": { "type": "array", "items": { "type": "string" } },
+    "sources": { "type": "array" },
+    "created": { "type": "string" },
+    "updated": { "type": "string" },
+    "status": { "type": "string" },
+    "aliases": { "type": "array" },
+    "related": { "type": "array" },
+    "confidence": { "type": "string" },
+    "validation_status": { "type": "string" },
+    "fidelity_status": { "type": "string" },
+    "retrieval_priority": { "type": "string" },
+    "symbolic_role": { "type": "string" },
+    "evidence_lane": { "type": "string" },
+    "requires_review": { "type": "boolean" },
+    "approved_use": { "type": "array", "items": { "type": "string" } },
+    "prohibited_use": { "type": "array", "items": { "type": "string" } }
+  }
+}
+

@@ -1,0 +1,23 @@
+# Never publish private vault contents or raw source material.
+raw/
+*.pdf
+*.epub
+*.mobi
+*.azw3
+*.docx
+*.pages
+*.zip
+*.tar
+*.tar.gz
+
+# Local/editor noise.
+.DS_Store
+.obsidian/
+.trash/
+__pycache__/
+.pytest_cache/
+
+# Local validation artifacts.
+*.log
+tmp/
+
