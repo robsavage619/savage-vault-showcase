@@ -13,7 +13,7 @@ from pathlib import Path
 import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
-CHECKED_DIRS = ("docs", "playbooks", "examples", "templates")
+CHECKED_DIRS = ("reference", "playbooks", "examples", "templates")
 REQUIRED = ("type", "title", "summary", "tags", "sources", "created", "updated", "status")
 FRONTMATTER = re.compile(r"^---\n(.*?)\n---\n", re.S)
 

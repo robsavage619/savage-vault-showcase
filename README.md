@@ -18,7 +18,7 @@ This system addresses both.
 
 ### 1. A tiered retrieval ladder, not a search
 
-Agents route before they read. The [question router](docs/question-router.md) maps a query type to a starting surface; a one-line-per-page short index answers most questions without opening a page at all.
+Agents route before they read. The [question router](reference/question-router.md) maps a query type to a starting surface; a one-line-per-page short index answers most questions without opening a page at all.
 
 ```
 router → retrieval pack → short index → full index → page → raw source
@@ -28,7 +28,7 @@ Each rung is opened only if the previous one was insufficient. Most queries stop
 
 ### 2. Evidence grading in frontmatter
 
-Every page carries machine-readable maturity metadata, defined in the [metadata schema](docs/metadata-schema.md):
+Every page carries machine-readable maturity metadata, defined in the [metadata schema](reference/metadata-schema.md):
 
 | Field | Answers |
 |---|---|
@@ -45,11 +45,11 @@ The key separation: **`status: active` means the page is integrated. It says not
 
 ### 3. A gate for high-stakes claims
 
-The [source fidelity review gate](docs/source-fidelity-review-gate.md) blocks decision-grade answers in domains where being wrong changes behavior. Pages that haven't cleared it can still be used for orientation and synthesis — they just can't be the final authority.
+The [source fidelity review gate](reference/source-fidelity-review-gate.md) blocks decision-grade answers in domains where being wrong changes behavior. Pages that haven't cleared it can still be used for orientation and synthesis — they just can't be the final authority.
 
 ### 4. Contradictions are represented, not resolved
 
-When two sources disagree, the [claim conflict protocol](docs/claim-conflict-protocol.md) requires both to be stated, both source notes tagged, and `validation_status: disputed` set on each. The system is explicitly designed **not** to silently pick a winner.
+When two sources disagree, the [claim conflict protocol](reference/claim-conflict-protocol.md) requires both to be stated, both source notes tagged, and `validation_status: disputed` set on each. The system is explicitly designed **not** to silently pick a winner.
 
 A worked example ships in [`examples/replication-vs-reproduction.md`](examples/replication-vs-reproduction.md): two studies of the same literature report 98% success and 65% failure. Both are correct — they asked different questions. The concept card exists so an agent retrieving either one finds the reconciliation rather than the headline.
 
@@ -61,18 +61,26 @@ The [review checklist](playbooks/coding-agent-review-checklist.md) is the accept
 
 ### 6. Known gaps are tracked, not hidden
 
-A [gap register](docs/corpus-governance.md) records what's unreviewed, unresolved, or unverified, and a validation report snapshots corpus health. **Neither is allowed to claim the corpus is healthier than it is** — a recent entry corrects an earlier one that understated an unresolved-link count by two orders of magnitude.
+A [gap register](reference/corpus-governance.md) records what's unreviewed, unresolved, or unverified, and a validation report snapshots corpus health. **Neither is allowed to claim the corpus is healthier than it is** — a recent entry corrects an earlier one that understated an unresolved-link count by two orders of magnitude.
 
-An [evaluation suite](docs/corpus-agent-evaluation-suite.md) and [judge rubric](docs/corpus-agent-judge-rubric.md) exist to test retrieval quality. The register openly records that the suite has never been run.
+An [evaluation suite](reference/corpus-agent-evaluation-suite.md) and [judge rubric](reference/corpus-agent-judge-rubric.md) exist to test retrieval quality. The register openly records that the suite has never been run.
 
 ## Layout
+
+Two layers, deliberately separated.
+
+**`docs/` explains the system.** Short pieces written for a reader: [architecture](docs/architecture.md) (with a routing diagram), the [ingestion pipeline](docs/ingestion-pipeline.md), the [agent access model](docs/agent-access.md), [validation and governance](docs/validation-and-governance.md), and a [synthetic routing transcript](docs/sample-routing-transcript.md) showing correct agent behavior end to end.
+
+**`reference/` is the system.** The actual documents the maintaining agent reads — unedited except for private-domain removal. Longer, denser, and written for a machine rather than a visitor.
 
 ```
 OPERATING-MANUAL.md   the full conventions doc the maintaining agent reads first
 CONTENT-BOUNDARY.md   what is and isn't published here, and how that's enforced
-docs/                 schema, governance, routing, review gates, evaluation
+docs/                 guided tour — architecture, ingestion, access, governance
+reference/            the real artifacts — schema, router, gates, evaluation suite
 playbooks/            operating cards, task playbooks, retrieval packs
-examples/             representative concept cards showing the format
+examples/             concept cards as actually written
+samples/              redacted page samples showing each type's shape
 bases/                Obsidian Bases — live views over frontmatter
 templates/            page templates for each type
 schemas/              JSON Schema for page frontmatter
