@@ -1,0 +1,25 @@
+name: validate
+
+on: [push, pull_request]
+
+jobs:
+  leak-guard:
+    name: leak guard — no vault content in this repo
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python scripts/leak_guard.py
+
+  frontmatter:
+    name: example pages parse and carry required fields
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install pyyaml
+      - run: python scripts/check_frontmatter.py

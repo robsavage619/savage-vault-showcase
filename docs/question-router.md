@@ -37,7 +37,7 @@ This router tells agents where to start before answering from the vault. It rout
 | AI engineering, RAG, agents | [[retrieval-pack-ai-engineering]] | implementation details or eval design needed |
 | coding-agent, software-engineering, repo-change | [[coding-agent-operating-card]] then [[agent-access-coding-corpus]] then [[retrieval-pack-ai-engineering]] | implementation, validation, architecture, context-selection, or production-readiness judgment is needed |
 | local project under `~/Projects` | **project-context-manifests** then the matching project manifest | exact target repo is unnamed; target repo has missing/stale README, no AGENTS/CLAUDE, or high-stakes domain behavior |
-| training, hypertrophy, sleep, health | **retrieval-pack-health-training** | recommendation affects programming, injury, nutrition, or medical behavior |
+| training, sleep, applied physiology | **retrieval-pack-health-training** | recommendation affects programming, injury, nutrition, or medical behavior |
 | baseball, trades, sabermetrics | **retrieval-pack-baseball-trade-eval** | model feature, valuation, or causal claim is needed |
 | sports business, sponsorship, brand, marketing, pricing, product experiments | **sports-business-operating-card** then **retrieval-pack-sports-business-marketing** | sponsorship valuation, causal impact, ranking, pricing, or metric-governance claim is needed |
 | quant finance, investing | **retrieval-pack-quantitative-finance** | allocation or money decision is implied; any backtested signal needs the four gates in **compare-anomaly-replication-vs-decay** |

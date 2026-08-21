@@ -69,12 +69,14 @@ An [evaluation suite](docs/corpus-agent-evaluation-suite.md) and [judge rubric](
 
 ```
 OPERATING-MANUAL.md   the full conventions doc the maintaining agent reads first
+CONTENT-BOUNDARY.md   what is and isn't published here, and how that's enforced
 docs/                 schema, governance, routing, review gates, evaluation
 playbooks/            operating cards, task playbooks, retrieval packs
 examples/             representative concept cards showing the format
 bases/                Obsidian Bases — live views over frontmatter
 templates/            page templates for each type
-scripts/              corpus health check
+schemas/              JSON Schema for page frontmatter
+scripts/              corpus health check, leak guard, frontmatter check
 ```
 
 ## Health check
@@ -99,10 +101,20 @@ On the private corpus it currently reports, across 1,398 pages:
 
 The schema layer is clean; the link hygiene is not. Those numbers are published rather than rounded off because a health check that only reports what passes isn't one — and the corpus governance documents here explicitly forbid claiming the corpus is healthier than it is.
 
+## The boundary is a test, not a promise
+
+The vault this system maintains contains health, financial, relationship, and employer material. Keeping it out of a public repository is not something a `.gitignore` can guarantee — git history is permanent, so an ignore rule added later leaves the files in every prior commit.
+
+This repository therefore has an entirely separate history, and the boundary is enforced in CI. `scripts/leak_guard.py` fails the build on forbidden terms, on structural patterns that indicate vault content (`sources:` frontmatter pointing at raw files), and on credential shapes. It runs on every push.
+
+Building it immediately caught four domain labels and one path that manual review had missed — which is the argument for having it.
+
+See [CONTENT-BOUNDARY.md](CONTENT-BOUNDARY.md).
+
 ## What isn't here
 
 The corpus itself — source summaries, book chapter notes, first-party research, and all personal material — stays private. Page summaries derived from copyrighted books are not published. This repository is deliberately a separate git history from the vault, so no corpus content exists in it at any commit.
 
 ## License
 
-MIT for the system: schema, scripts, templates, and governance documents.
+MIT. See [LICENSE](LICENSE).

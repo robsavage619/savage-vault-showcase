@@ -37,7 +37,7 @@ This is a persistent, LLM-maintained knowledge base stored as markdown files in 
 1. **RAG & Retrieval** (**overview-rag-retrieval**) — dense retrieval, ANN search, reranking, embedding models, RAG evaluation, hierarchical/adaptive/agentic retrieval
 2. **Agentic LLMs & Tool Use** (**overview-agentic-llms**) — agent patterns, ReAct, Toolformer, Gorilla, CoALA, AutoGen, AgentBench; LLM app engineering; reasoning models and test-time compute; agent security ([[agent-isolation-design-patterns]])
 3. **LLM Evaluation** — MT-Bench, Chatbot Arena, G-Eval, LLM-as-judge methods, and the statistical layer ([[eval-statistical-inference]], [[eval-power-analysis]])
-4. **Exercise Science & Training** (**overview-exercise-science**) — hypertrophy, strength, periodization, sport nutrition
+4. **Exercise Science & Training** (**overview-exercise-science**) — training science and applied physiology
 5. **Sleep Science** (**overview-sleep-science**) — architecture, circadian timing, CBT-I, wearable recovery
 6. **Sabermetrics & Baseball Analytics** (**overview-sabermetrics**) — WAR and its inputs, analytics books, the trade-eval project
 7. **Sports Business, Marketing Science & Experiments** (**sports-business-operating-card**, **retrieval-pack-sports-business-marketing**) — sponsorship, brand growth, pricing, marketing metrics, rankings, networks, and controlled experiments

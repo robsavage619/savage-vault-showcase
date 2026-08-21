@@ -50,8 +50,8 @@ Use [[corpus-agent-judge-rubric]]. A strong answer cites relevant pages, names u
 | E11 | "When should an LLM agent use tools?" | [[retrieval-pack-ai-engineering]], **react-synergizing-reasoning-and-acting**, **toolformer** | cites agent sources |
 | E12 | "What are common LLM-as-judge risks?" | **llm-as-judge-mt-bench**, **g-eval-nlg-evaluation** | names bias limits |
 | E13 | "Design a retrieval ladder for this vault." | [[question-router]], **index-short**, **index** | follows documented ladder |
-| E14 | "What should I read first for hypertrophy?" | **retrieval-pack-health-training**, **overview-exercise-science** | uses health pack |
-| E15 | "How many weekly sets should I do?" | **schoenfeld-2016-rt-volume-hypertrophy**, **volume-landmarks-mev-mav-mrv** | avoids one-size prescription |
+| E14 | "What should I read first in this domain?" | **retrieval-pack-health-training**, **overview-exercise-science** | uses health pack |
+| E15 | "What dose should I use?" | **a primary-study note**, **a dose-landmark concept card** | avoids one-size prescription |
 | E16 | "Are preacher curls better than incline curls?" | **retrieval-pack-health-training** | checks source maturity before prescription |
 | E17 | "Use the Cinarli 2025 note to program core work." | [[source-fidelity-review-gate]], **corpus-validation-report** | flags abstract-only risk |
 | E18 | "What is CBT-I?" | **overview-sleep-science**, **cbt-i** | stays non-medical |
