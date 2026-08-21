@@ -1,0 +1,37 @@
+filters:
+  and:
+    - file.inFolder("wiki")
+    - file.ext == "md"
+    - or:
+        - note.domains.contains("sports-business")
+        - note.tags.contains("sports-business")
+        - note.tags.contains("marketing-science")
+        - note.tags.contains("sponsorship")
+        - note.tags.contains("brand-strategy")
+        - note.tags.contains("marketing-metrics")
+        - note.tags.contains("experimentation")
+        - note.tags.contains("ranking")
+properties:
+  note.type:
+    displayName: Type
+  note.symbolic_role:
+    displayName: Role
+  note.retrieval_priority:
+    displayName: Priority
+  note.validation_status:
+    displayName: Validation
+  note.fidelity_status:
+    displayName: Fidelity
+  note.updated:
+    displayName: Updated
+views:
+  - type: table
+    name: Sports business and marketing
+    order:
+      - file.name
+      - note.type
+      - note.symbolic_role
+      - note.retrieval_priority
+      - note.validation_status
+      - note.fidelity_status
+      - note.updated

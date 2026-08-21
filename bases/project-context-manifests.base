@@ -1,0 +1,28 @@
+filters:
+  and:
+    - file.inFolder("wiki")
+    - file.ext == "md"
+    - note.type == "project-context-manifest"
+properties:
+  note.project_path:
+    displayName: Path
+  note.project_status:
+    displayName: Status
+  note.stack:
+    displayName: Stack
+  note.retrieval_priority:
+    displayName: Priority
+  note.validation_status:
+    displayName: Validation
+  note.updated:
+    displayName: Updated
+views:
+  - type: table
+    name: Project context manifests
+    order:
+      - file.name
+      - note.project_status
+      - note.stack
+      - note.retrieval_priority
+      - note.validation_status
+      - note.updated

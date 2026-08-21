@@ -1,0 +1,30 @@
+filters:
+  and:
+    - file.inFolder("wiki")
+    - file.ext == "md"
+    - or:
+        - note.type == "overview"
+        - note.symbolic_role == "retrieval-pack"
+        - note.tags.contains("overview")
+        - note.tags.contains("retrieval")
+properties:
+  note.type:
+    displayName: Type
+  note.domains:
+    displayName: Domains
+  note.retrieval_priority:
+    displayName: Priority
+  note.validation_status:
+    displayName: Validation
+  note.updated:
+    displayName: Updated
+views:
+  - type: table
+    name: Knowledge coverage
+    order:
+      - file.name
+      - note.type
+      - note.domains
+      - note.retrieval_priority
+      - note.validation_status
+      - note.updated

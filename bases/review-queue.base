@@ -1,0 +1,46 @@
+filters:
+  and:
+    - file.inFolder("wiki")
+    - file.ext == "md"
+    - or:
+        - note.confidence != "high"
+        - note.status != "active"
+        - note.validation_status == "unreviewed"
+        - note.validation_status == "disputed"
+        - note.fidelity_status == "abstract-only"
+        - note.index_eligible == false
+        - note.updated < now() - "180d"
+formulas:
+  stale_days: "((now() - note.updated) / 86400000).round()"
+properties:
+  note.type:
+    displayName: Type
+  note.status:
+    displayName: Status
+  note.confidence:
+    displayName: Conf
+  note.validation_status:
+    displayName: Validation
+  note.fidelity_status:
+    displayName: Fidelity
+  note.index_eligible:
+    displayName: Index eligible
+  note.updated:
+    displayName: Updated
+  formula.stale_days:
+    displayName: Days since update
+views:
+  - type: table
+    name: Needs review
+    order:
+      - file.name
+      - note.type
+      - note.confidence
+      - note.validation_status
+      - note.fidelity_status
+      - note.index_eligible
+      - note.status
+      - note.updated
+      - formula.stale_days
+    summaries:
+      formula.stale_days: Average

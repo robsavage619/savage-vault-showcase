@@ -1,0 +1,36 @@
+filters:
+  and:
+    - file.inFolder("wiki")
+    - file.ext == "md"
+    - or:
+        - note.type == "source-summary"
+        - note.type == "book-overview"
+        - note.type == "research-finding"
+    - or:
+        - note.fidelity_status != "full-text-checked"
+        - note.validation_status != "validated"
+        - note.index_eligible != true
+properties:
+  note.type:
+    displayName: Type
+  note.confidence:
+    displayName: Conf
+  note.fidelity_status:
+    displayName: Fidelity
+  note.validation_status:
+    displayName: Validation
+  note.index_eligible:
+    displayName: Index eligible
+  note.updated:
+    displayName: Updated
+views:
+  - type: table
+    name: Source fidelity review
+    order:
+      - file.name
+      - note.type
+      - note.confidence
+      - note.fidelity_status
+      - note.validation_status
+      - note.index_eligible
+      - note.updated

@@ -1,0 +1,17 @@
+filters:
+  and:
+    - file.inFolder("wiki")
+    - file.ext == "md"
+    - note.updated > now() - "30d"
+properties:
+  note.type:
+    displayName: Type
+  note.updated:
+    displayName: Updated
+views:
+  - type: table
+    name: Updated in last 30 days
+    order:
+      - note.updated
+      - file.name
+      - note.type

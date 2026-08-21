@@ -1,0 +1,37 @@
+filters:
+  and:
+    - file.inFolder("wiki")
+    - file.ext == "md"
+    - or:
+        - note.domains.contains("finops")
+        - note.tags.contains("finops")
+        - note.tags.contains("cloud-cost")
+        - note.tags.contains("ai-cost")
+        - note.tags.contains("unit-economics")
+properties:
+  note.type:
+    displayName: Type
+  note.source_kind:
+    displayName: Source kind
+  note.evidence_level:
+    displayName: Evidence
+  note.authority_level:
+    displayName: Authority
+  note.validation_status:
+    displayName: Validation
+  note.retrieval_priority:
+    displayName: Priority
+  note.updated:
+    displayName: Updated
+views:
+  - type: table
+    name: FinOps and cost engineering
+    order:
+      - file.name
+      - note.type
+      - note.source_kind
+      - note.evidence_level
+      - note.authority_level
+      - note.validation_status
+      - note.retrieval_priority
+      - note.updated

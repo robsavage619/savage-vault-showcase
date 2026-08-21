@@ -1,0 +1,32 @@
+filters:
+  and:
+    - file.inFolder("wiki")
+    - file.ext == "md"
+    - or:
+        - note.type == "source-summary"
+        - note.type == "book-overview"
+        - note.type == "research-finding"
+properties:
+  note.type:
+    displayName: Type
+  note.source_kind:
+    displayName: Source kind
+  note.evidence_level:
+    displayName: Evidence
+  note.fidelity_status:
+    displayName: Fidelity
+  note.validation_status:
+    displayName: Validation
+  note.updated:
+    displayName: Updated
+views:
+  - type: table
+    name: Evidence register
+    order:
+      - file.name
+      - note.type
+      - note.source_kind
+      - note.evidence_level
+      - note.fidelity_status
+      - note.validation_status
+      - note.updated

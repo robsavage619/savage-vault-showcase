@@ -1,0 +1,29 @@
+filters:
+  and:
+    - file.inFolder("wiki")
+    - file.ext == "md"
+    - or:
+        - note.validation_status == "disputed"
+        - note.status == "needs-review"
+        - note.tags.contains("contradicted")
+properties:
+  note.type:
+    displayName: Type
+  note.status:
+    displayName: Status
+  note.validation_status:
+    displayName: Validation
+  note.confidence:
+    displayName: Conf
+  note.updated:
+    displayName: Updated
+views:
+  - type: table
+    name: Claim conflict register
+    order:
+      - file.name
+      - note.type
+      - note.status
+      - note.validation_status
+      - note.confidence
+      - note.updated

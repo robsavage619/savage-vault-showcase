@@ -1,0 +1,30 @@
+filters:
+  and:
+    - file.inFolder("wiki")
+    - file.ext == "md"
+    - or:
+        - note.retrieval_priority == "critical"
+        - note.retrieval_priority == "high"
+        - note.symbolic_role == "router"
+        - note.symbolic_role == "retrieval-pack"
+properties:
+  note.type:
+    displayName: Type
+  note.symbolic_role:
+    displayName: Role
+  note.retrieval_priority:
+    displayName: Priority
+  note.validation_status:
+    displayName: Validation
+  note.updated:
+    displayName: Updated
+views:
+  - type: table
+    name: Retrieval priority
+    order:
+      - file.name
+      - note.type
+      - note.symbolic_role
+      - note.retrieval_priority
+      - note.validation_status
+      - note.updated
