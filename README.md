@@ -84,7 +84,7 @@ samples/              redacted page samples showing each type's shape
 bases/                Obsidian Bases — live views over frontmatter
 templates/            page templates for each type
 schemas/              JSON Schema for page frontmatter
-scripts/              corpus health check, leak guard, frontmatter check
+scripts/              vault sync, leak guard, frontmatter check, corpus health
 ```
 
 ## Health check
@@ -108,6 +108,21 @@ On the private corpus it currently reports, across 1,398 pages:
 ```
 
 The schema layer is clean; the link hygiene is not. Those numbers are published rather than rounded off because a health check that only reports what passes isn't one — and the corpus governance documents here explicitly forbid claiming the corpus is healthier than it is.
+
+## Keeping this repo in sync with a private vault
+
+The pages under `reference/`, `playbooks/`, and `examples/` are *derived* from the private vault, not authored here. Copying them by hand does not survive an evolving corpus: the copies drift, and nothing distinguishes a deliberate redaction from a stale file.
+
+`scripts/sync_from_vault.py` makes the transformation reproducible — an explicit allowlist of publishable pages, then three ordered phases: pre-drop rewrites, line dropping, and post-normalization rewrites that also convert wikilinks pointing outside the published set into plain text.
+
+```bash
+python scripts/sync_from_vault.py --vault ~/Vault/savage_vault --check   # report drift
+python scripts/sync_from_vault.py --vault ~/Vault/savage_vault           # regenerate
+```
+
+**The redaction rules themselves are not committed.** They name the private domains, project codenames, and personal material they remove, so publishing them would defeat their purpose. `scripts/scrub_rules.py` is gitignored; `scripts/scrub_rules.example.py` shows the shape.
+
+The allowlist is deliberate rather than a filter. An early denylist pass over ~1,400 pages kept health and personal-medical concept cards because they predated the metadata fields being filtered on. Enumerating what may be published is the only version that fails safe.
 
 ## The boundary is a test, not a promise
 

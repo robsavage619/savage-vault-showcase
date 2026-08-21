@@ -9,6 +9,7 @@ so the guarantee survives future edits.
 from __future__ import annotations
 
 import re
+import subprocess
 import sys
 from pathlib import Path
 
@@ -43,15 +44,33 @@ FORBIDDEN_PATTERNS = [
 ]
 
 
+def tracked_files() -> list[Path]:
+    """Return the files git would publish.
+
+    Scanning the working tree would flag ignored local files that never reach the
+    remote — notably `scripts/scrub_rules.py`, whose whole purpose is to name the
+    terms this guard forbids. What matters is what is tracked.
+    """
+    result = subprocess.run(
+        ["git", "ls-files", "-z"], cwd=ROOT, capture_output=True, text=True, check=True
+    )
+    return [ROOT / name for name in result.stdout.split("\0") if name]
+
+
 def scan() -> list[str]:
     """Return a list of human-readable violations, empty when the repo is clean."""
     violations: list[str] = []
-    for path in sorted(ROOT.rglob("*")):
+    for path in sorted(tracked_files()):
         if not path.is_file() or any(part in SKIP_DIRS for part in path.parts):
             continue
         # These files must name the forbidden patterns in order to enforce or
         # document them, so they are exempt from the pattern scan by design.
-        if path.name in {"leak_guard.py", "corpus_health.py", "CONTENT-BOUNDARY.md"}:
+        if path.name in {
+            "leak_guard.py",
+            "corpus_health.py",
+            "scrub_rules.example.py",
+            "CONTENT-BOUNDARY.md",
+        }:
             continue
         try:
             text = path.read_text(encoding="utf-8")
