@@ -31,7 +31,7 @@ From `CONTENT-BOUNDARY.md`. The repo publishes the system, not the vault.
 - Included: operating manual; metadata schema, governance contract, review gates, contradiction protocol; routing (question router, agent entry, retrieval packs); agent behavior cards and playbooks; Bases definitions and templates; twelve example cards on public technical subjects; the corpus health checker and leak guard.
 - Excluded: `raw/` (every PDF, EPUB, paper, book); source summaries and chapter notes from copyrighted works; first-party research (factor models, signal registers, backtest receipts); health, financial, relationship, family, career, and employer material; local project context manifests and absolute filesystem paths; any full or partial vault export.
 - The boundary is structural: a `.gitignore` rule would not help because git history is permanent, so this repo has its own history.
-- Enforcement: `scripts/leak_guard.py` fails on forbidden terms (personal, health, financial, employer, private project names), vault-shaped patterns (`[[raw/` links, `sources:` frontmatter pointing at raw files), and credential shapes (GitHub tokens, API keys, bearer tokens). Never weaken or bypass it.
+- Enforcement: `scripts/leak_guard.py` fails on forbidden terms (personal, health, financial, employer, private project names), vault-shaped patterns (wikilinks and `sources:` frontmatter pointing into the vault's raw-sources folder; the exact patterns are in the script, and quoting them in a tracked file, this one included, fails the check), and credential shapes (GitHub tokens, API keys, bearer tokens). Never weaken or bypass it.
 - Do not paste vault notes, paths, or terms into any file here, including this one.
 
 ## Git
