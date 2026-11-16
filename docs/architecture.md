@@ -6,21 +6,10 @@ The design goal is not “store everything.” The design goal is “help an age
 
 ## System shape
 
-```mermaid
-flowchart TD
-    A["START HERE"] --> B["agent-entry"]
-    B --> C["question-router"]
-    C --> D["retrieval packs"]
-    C --> E["project manifests"]
-    C --> F["domain overviews"]
-    D --> G["playbooks"]
-    D --> H["source summaries"]
-    D --> I["concept cards"]
-    E --> J["live repository inspection"]
-    G --> K["validation checklist"]
-    H --> K
-    I --> K
-```
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="img/system-shape-dark.svg">
+  <img src="img/system-shape-light.svg" alt="System shape: START HERE leads to agent-entry, then the question-router. The router sends the agent to retrieval packs, project manifests or domain overviews. Retrieval packs lead to playbooks, source summaries and concept cards, which all end at the validation checklist. Project manifests lead to live repository inspection.">
+</picture>
 
 ## Main note types
 
