@@ -1,6 +1,22 @@
+<div align="center">
+
+<img src="docs/img/obsidian-logo.svg" alt="Obsidian logo" width="96" height="96">
+
 # savage-vault-system
 
-The operating system for a personal knowledge corpus that an LLM agent maintains and retrieves from — schema, governance, routing, and validation.
+**The operating system for an Obsidian knowledge vault that an LLM agent maintains and retrieves from.**
+
+Schema, governance, routing, and validation.
+
+[![validate](https://github.com/robsavage619/savage-vault-showcase/actions/workflows/validate.yml/badge.svg)](https://github.com/robsavage619/savage-vault-showcase/actions/workflows/validate.yml)
+&nbsp;[The problem](#the-problem) · [Design](#design) · [Layout](#layout) · [Health check](#health-check) · [The boundary](#the-boundary-is-a-test-not-a-promise)
+
+</div>
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/img/retrieval-ladder-dark.svg">
+  <img src="docs/img/retrieval-ladder-light.svg" alt="The retrieval ladder: router, retrieval pack, short index, full index, page, raw source. Each rung opens only if the one before it was not enough, and most queries stop at the retrieval pack.">
+</picture>
 
 This repository contains **the system, not the corpus.** The corpus it governs is private: ~1,400 markdown pages covering AI engineering, software architecture, quantitative finance, sports analytics, and health science. What's published here is the machinery that keeps a corpus that size honest and retrievable — the part that's transferable.
 
@@ -20,9 +36,7 @@ This system addresses both.
 
 Agents route before they read. The [question router](reference/question-router.md) maps a query type to a starting surface; a one-line-per-page short index answers most questions without opening a page at all.
 
-```
-router → retrieval pack → short index → full index → page → raw source
-```
+The ladder is the diagram at the top of this page: router, retrieval pack, short index, full index, page, raw source.
 
 Each rung is opened only if the previous one was insufficient. Most queries stop at rung two. A [retrieval pack](playbooks/retrieval-pack-ai-engineering.md) is a curated routing document for one domain — reading order, task paths, and use rules that constrain how the evidence may be applied.
 
@@ -38,6 +52,11 @@ Every page carries machine-readable maturity metadata, defined in the [metadata 
 | `validation_status` | unreviewed, reviewed, validated, **disputed**, deprecated |
 | `fidelity_status` | abstract-only → source-checked → quote-checked → full-text-checked |
 | `approved_use` / `prohibited_use` | what this page may and may not be cited for |
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/img/evidence-tracks-dark.svg">
+  <img src="docs/img/evidence-tracks-light.svg" alt="Three frontmatter fields that move independently. status: draft, active, stale, needs-review. validation_status: unreviewed, reviewed, validated, plus disputed and deprecated. fidelity_status: abstract-only, source-checked, quote-checked, full-text-checked.">
+</picture>
 
 The key separation: **`status: active` means the page is integrated. It says nothing about whether the claims were verified.** That's `validation_status` and `fidelity_status`, and they move independently.
 
@@ -113,6 +132,11 @@ The schema layer is clean; the link hygiene is not. Those numbers are published 
 
 The pages under `reference/`, `playbooks/`, and `examples/` are *derived* from the private vault, not authored here. Copying them by hand does not survive an evolving corpus: the copies drift, and nothing distinguishes a deliberate redaction from a stale file.
 
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/img/publish-boundary-dark.svg">
+  <img src="docs/img/publish-boundary-light.svg" alt="How pages cross into this repository: the private vault feeds an explicit allowlist, allowlisted pages pass three ordered scrub phases in sync_from_vault.py, then the leak guard in CI, and only then land in this repo, which has its own git history.">
+</picture>
+
 `scripts/sync_from_vault.py` makes the transformation reproducible — an explicit allowlist of publishable pages, then three ordered phases: pre-drop rewrites, line dropping, and post-normalization rewrites that also convert wikilinks pointing outside the published set into plain text.
 
 ```bash
@@ -141,3 +165,5 @@ The corpus itself — source summaries, book chapter notes, first-party research
 ## License
 
 MIT. See [LICENSE](LICENSE).
+
+The Obsidian name and logo are trademarks of their owner and are used here only to say what this system is built on. This project is not affiliated with or endorsed by Obsidian.

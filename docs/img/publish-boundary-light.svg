@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 250" width="900" role="img" aria-labelledby="t d" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif">
+  <title id="t">How pages cross from the private vault into this repository</title>
+  <desc id="d">The private vault of about 1,400 pages feeds an explicit allowlist. Allowlisted pages pass through three ordered scrub phases in sync_from_vault.py, then the leak guard in CI, and only then land in this public repository, which has its own separate git history.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 10 5 0 10z" fill="#59636e"/></marker>
+  </defs>
+
+  <text x="92" y="24" text-anchor="middle" font-size="12" font-weight="600" fill="#59636e" letter-spacing="1">PRIVATE</text>
+  <text x="559" y="24" text-anchor="middle" font-size="12" font-weight="600" fill="#59636e" letter-spacing="1">PUBLISHING PATH</text>
+  <path d="M196 12V238" stroke="#d1d9e0" stroke-width="1.5" stroke-dasharray="5 5"/>
+
+  <g text-anchor="middle" font-size="12" fill="#59636e">
+    <rect x="16" y="52" width="152" height="120" rx="10" fill="#f6f8fa" stroke="#59636e" stroke-width="1.5" stroke-dasharray="6 4"/>
+    <text x="92" y="92" font-size="15" font-weight="600" fill="#1f2328">Private vault</text>
+    <text x="92" y="114">about 1,400 pages</text>
+    <text x="92" y="132">stays private</text>
+
+    <rect x="224" y="52" width="152" height="120" rx="10" fill="#ede9fe" stroke="#7c3aed" stroke-width="1.5"/>
+    <text x="300" y="92" font-size="15" font-weight="600" fill="#1f2328">Allowlist</text>
+    <text x="300" y="114">every publishable page</text>
+    <text x="300" y="132">is named, one by one</text>
+
+    <rect x="400" y="52" width="152" height="120" rx="10" fill="#f6f8fa" stroke="#d1d9e0" stroke-width="1.5"/>
+    <text x="476" y="84" font-size="15" font-weight="600" fill="#1f2328">Scrub</text>
+    <text x="476" y="108">1. pre-drop rewrites</text>
+    <text x="476" y="126">2. line dropping</text>
+    <text x="476" y="144">3. normalize, unlink</text>
+
+    <rect x="576" y="52" width="152" height="120" rx="10" fill="#fff8c5" stroke="#9a6700" stroke-width="1.5"/>
+    <text x="652" y="84" font-size="15" font-weight="600" fill="#1f2328">Leak guard</text>
+    <text x="652" y="108">forbidden terms</text>
+    <text x="652" y="126">vault-shaped patterns</text>
+    <text x="652" y="144">credential shapes</text>
+
+    <rect x="752" y="52" width="132" height="120" rx="10" fill="#dafbe1" stroke="#1a7f37" stroke-width="1.5"/>
+    <text x="818" y="92" font-size="15" font-weight="600" fill="#1f2328">This repo</text>
+    <text x="818" y="114">its own git history,</text>
+    <text x="818" y="132">no vault commits</text>
+  </g>
+
+  <g font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="11.5" fill="#59636e" text-anchor="middle">
+    <text x="388" y="196">sync_from_vault.py</text>
+    <text x="652" y="196">leak_guard.py</text>
+  </g>
+  <path d="M224 204H552" stroke="#d1d9e0" stroke-width="1.5"/>
+  <path d="M576 204H728" stroke="#d1d9e0" stroke-width="1.5"/>
+  <text x="652" y="226" text-anchor="middle" font-size="12" fill="#9a6700">a match fails the build</text>
+
+  <g stroke="#59636e" stroke-width="1.5" marker-end="url(#a)">
+    <path d="M170 112H222"/><path d="M378 112H398"/><path d="M554 112H574"/><path d="M730 112H750"/>
+  </g>
+</svg>

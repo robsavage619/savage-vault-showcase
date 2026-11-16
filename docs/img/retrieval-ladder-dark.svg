@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 232" width="900" role="img" aria-labelledby="t d" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif">
+  <title id="t">The retrieval ladder</title>
+  <desc id="d">Six rungs read left to right: router, retrieval pack, short index, full index, page, raw source. Each rung is opened only if the previous one was not enough. Most queries stop at the retrieval pack.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 10 5 0 10z" fill="#9198a1"/></marker>
+  </defs>
+
+  <path d="M16 46V36H292V46" fill="none" stroke="#a78bfa" stroke-width="1.5"/>
+  <text x="154" y="24" text-anchor="middle" font-size="13" font-weight="600" fill="#a78bfa">most queries stop here</text>
+
+  <g font-size="12" fill="#9198a1" text-anchor="middle">
+    <g>
+      <rect x="16" y="58" width="128" height="84" rx="10" fill="#2a2150" stroke="#a78bfa" stroke-width="1.5"/>
+      <text x="32" y="80" text-anchor="start" font-size="11" font-weight="600" fill="#a78bfa">1</text>
+      <text x="80" y="104" font-size="15" font-weight="600" fill="#e6edf3">Router</text>
+      <text x="80" y="124">classify the query</text>
+    </g>
+    <g>
+      <rect x="164" y="58" width="128" height="84" rx="10" fill="#2a2150" stroke="#a78bfa" stroke-width="1.5"/>
+      <text x="180" y="80" text-anchor="start" font-size="11" font-weight="600" fill="#a78bfa">2</text>
+      <text x="228" y="104" font-size="15" font-weight="600" fill="#e6edf3">Retrieval pack</text>
+      <text x="228" y="124">one domain's route</text>
+    </g>
+    <g>
+      <rect x="312" y="58" width="128" height="84" rx="10" fill="#151b23" stroke="#3d444d" stroke-width="1.5"/>
+      <text x="328" y="80" text-anchor="start" font-size="11" font-weight="600">3</text>
+      <text x="376" y="104" font-size="15" font-weight="600" fill="#e6edf3">Short index</text>
+      <text x="376" y="124">one line per page</text>
+    </g>
+    <g>
+      <rect x="460" y="58" width="128" height="84" rx="10" fill="#151b23" stroke="#3d444d" stroke-width="1.5"/>
+      <text x="476" y="80" text-anchor="start" font-size="11" font-weight="600">4</text>
+      <text x="524" y="104" font-size="15" font-weight="600" fill="#e6edf3">Full index</text>
+      <text x="524" y="124">every page listed</text>
+    </g>
+    <g>
+      <rect x="608" y="58" width="128" height="84" rx="10" fill="#151b23" stroke="#3d444d" stroke-width="1.5"/>
+      <text x="624" y="80" text-anchor="start" font-size="11" font-weight="600">5</text>
+      <text x="672" y="104" font-size="15" font-weight="600" fill="#e6edf3">Page</text>
+      <text x="672" y="124">the note itself</text>
+    </g>
+    <g>
+      <rect x="756" y="58" width="128" height="84" rx="10" fill="#151b23" stroke="#3d444d" stroke-width="1.5"/>
+      <text x="772" y="80" text-anchor="start" font-size="11" font-weight="600">6</text>
+      <text x="820" y="104" font-size="15" font-weight="600" fill="#e6edf3">Raw source</text>
+      <text x="820" y="124">original document</text>
+    </g>
+  </g>
+
+  <g stroke="#9198a1" stroke-width="1.5" marker-end="url(#a)">
+    <path d="M146 100H162"/><path d="M294 100H310"/><path d="M442 100H458"/><path d="M590 100H606"/><path d="M738 100H754"/>
+  </g>
+
+  <path d="M16 180H880" stroke="#3d444d" stroke-width="1.5" marker-end="url(#a)"/>
+  <text x="16" y="204" font-size="12" fill="#9198a1">cheap: a few lines of context</text>
+  <text x="884" y="204" font-size="12" fill="#9198a1" text-anchor="end">expensive: the whole document</text>
+  <text x="450" y="204" font-size="12" fill="#9198a1" text-anchor="middle">each rung opens only if the one before it was not enough</text>
+</svg>
