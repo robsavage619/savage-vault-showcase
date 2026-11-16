@@ -22,16 +22,16 @@ FRONTMATTER = re.compile(r"^---\n(.*?)\n---\n", re.S)
 WIKILINK = re.compile(r"\[\[([^\]|#]+)\]\]")
 
 
-def check(vault: str) -> int:
+def check(vault: str) -> list[tuple[str, str]]:
     """Run every check against `vault` and print a report.
 
-    Returns the number of problems found.
+    Returns the problems found, as (slug, issue) pairs.
     """
     wiki = os.path.join(vault, "wiki")
     files = sorted(glob.glob(os.path.join(wiki, "*.md")))
     if not files:
         print(f"no pages found under {wiki}", file=sys.stderr)
-        return 1
+        return [("", f"no pages found under {wiki}")]
 
     pages = {os.path.splitext(os.path.basename(f))[0] for f in files}
     problems: list[tuple[str, str]] = []
@@ -91,14 +91,34 @@ def check(vault: str) -> int:
         print(f"  {slug}: {issue}")
     if len(problems) > 40:
         print(f"  ... and {len(problems) - 40} more")
-    return len(problems)
+    return problems
 
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("vault", help="path to the vault root (the directory containing wiki/)")
+    parser.add_argument("--baseline", help="file of known problems, one 'slug: issue' per line; only problems not in it fail")
+    parser.add_argument("--write-baseline", action="store_true", help="write the current problems to --baseline and exit 0")
     args = parser.parse_args()
-    return 1 if check(args.vault) else 0
+    lines = sorted({f"{slug}: {issue}" for slug, issue in check(args.vault)})
+    if not args.baseline:
+        return 1 if lines else 0
+    if args.write_baseline:
+        with open(args.baseline, "w", encoding="utf-8") as fh:
+            fh.write("\n".join(lines) + "\n")
+        print(f"baseline: {len(lines)} known problems written to {args.baseline}")
+        return 0
+    def key(line: str) -> str:
+        # a page already over its size cap stays one known problem as its word count moves
+        return re.sub(r": \d+ words exceeds", ": N words exceeds", line)
+
+    with open(args.baseline, encoding="utf-8") as fh:
+        known = {key(line) for line in fh.read().splitlines()}
+    new = [line for line in lines if key(line) not in known]
+    print(f"new problems not in baseline: {len(new)}")
+    for line in new:
+        print(f"  {line}")
+    return 1 if new else 0
 
 
 if __name__ == "__main__":
