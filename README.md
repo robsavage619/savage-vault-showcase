@@ -162,6 +162,10 @@ See [CONTENT-BOUNDARY.md](CONTENT-BOUNDARY.md).
 
 The corpus itself — source summaries, book chapter notes, first-party research, and all personal material — stays private. Page summaries derived from copyrighted books are not published. This repository is deliberately a separate git history from the vault, so no corpus content exists in it at any commit.
 
+## How this was built
+
+I designed the schema, the routing, and the publishing boundary. Claude Code and Codex helped write the docs and validation scripts, and the commit trailers show it. The check that does not depend on a model is the CI validation script, which fails the build if the showcase publishes anything the boundary rules forbid.
+
 ## License
 
 MIT. See [LICENSE](LICENSE).
